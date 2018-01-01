@@ -85,12 +85,13 @@ class LandingPage extends React.Component {
         }
 
         const landingPageStyle = {
-            minHeight: '100vh',
+            height: '100vh',
             width: '100vw',
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
-            backgroundColor: colors.bgGray
+            backgroundColor: colors.bgGray,
+            overflow: 'hidden'
         };
 
         const kocStyle = {

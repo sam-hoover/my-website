@@ -9,6 +9,7 @@ function KnockoutTextContainer(props) {
         ...style,
         backgroundAttachment: 'fixed',
         color: fallbackColor,
+        display: 'inline',
         webkitTextFillColor: 'transparent',
         webkitBackgroundClip: 'text'
     };
