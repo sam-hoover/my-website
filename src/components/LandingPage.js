@@ -29,6 +29,7 @@ class LandingPage extends React.Component {
 
     componentDidMount = () => {
         window.addEventListener("resize", this.setPageSize);
+        this.setPageSize();
     };
 
     componentWillUnmount = () => {
