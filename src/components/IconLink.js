@@ -49,13 +49,12 @@ class IconLink extends React.Component {
             fontSize: `${this.props.size / 2}px`,
             color: this.props.color,
             zIndex: '2',
-            transition: 'all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+            transition: 'all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         };
 
         let iconHoverStyle = {
             color: this.props.bgColor,
             transform: 'scale(2) rotate(360deg)',
-            //boxShadow: '0 8px 6px -6px black'
         };
 
         if(this.state.hover) {

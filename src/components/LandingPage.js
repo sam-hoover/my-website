@@ -13,20 +13,79 @@ import './../style/LandingPage.css';
 class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.defaultPageTitle = 'Hey Yah';
 
         this.state = {
-            pageTitle: this.defaultPageTitle
+            pageSize: 'lg'
         };
     }
 
-    setPageTitle = (title) => {
-        this.setState({pageTitle: title});
+    pageSize = {
+        xs: 576,
+        sm: 768,
+        md: 998,
+        lg: 1200,
+        xl: 9999
+    };
+
+    componentDidMount = () => {
+        window.addEventListener("resize", this.setPageSize);
+    };
+
+    componentWillUnmount = () => {
+        window.removeEventListener("resize", this.setPageSize);
+    };
+
+    getPageSize = () => {
+        const pageWidth = window.innerWidth;
+
+        if(pageWidth < this.pageSize.xs) {
+            return 'xs';
+        } else if(pageWidth >= this.pageSize.xs && pageWidth < this.pageSize.sm) {
+            return 'sm';
+        } else if(pageWidth >= this.pageSize.sm && pageWidth < this.pageSize.md) {
+            return 'md';
+        } else if(pageWidth >= this.pageSize.md && pageWidth < this.pageSize.lg) {
+            return 'lg';
+        } else {
+            return 'xl';
+        }
+    };
+
+    setPageSize = () => {
+        const pageSize = this.getPageSize();
+
+        if(pageSize !== this.state.pageSize) {
+            this.setState({pageSize: pageSize});
+        }
     };
 
     render() {
+        let iconSize = 75;
+        let koFontSize = '400%';
+        let koHeaderFontSize = '900%';
+
+        switch(this.state.pageSize) {
+            case 'xs':
+            case 'sm':
+                iconSize = 50;
+                koFontSize = '200%';
+                koHeaderFontSize = '500%';
+                break;
+            case 'md':
+                iconSize = 50;
+                koFontSize = '300%';
+                koHeaderFontSize = '700%';
+                break;
+            case 'lg':
+            case 'xl':
+                iconSize = 75;
+                koFontSize = '400%';
+                koHeaderFontSize = '900%';
+                break;
+        }
+
         const landingPageStyle = {
-            height: '100vh',
+            minHeight: '100vh',
             width: '100vw',
             display: 'flex',
             justifyContent: 'center',
@@ -37,8 +96,6 @@ class LandingPage extends React.Component {
         const kocStyle = {
             display: 'flex',
             flexDirection: 'column',
-            //alignItems: 'flex-start',
-            //justifyContent: 'center',
             width: '100vw',
             fontFamily: 'Montserrat',
             fontWeight: 800,
@@ -47,15 +104,12 @@ class LandingPage extends React.Component {
 
         const koStyle = {
             marginLeft: '9vw',
-            fontSize: '400%',
-            //width: '70vw',
-            //border: '2px solid white'
+            fontSize: koFontSize,
         };
 
         const linkContainerStyle = {
             marginTop: '95px',
             marginLeft: '9vw',
-            //border: '2px solid white',
             backgroundColor: 'transparent'
         };
 
@@ -70,9 +124,7 @@ class LandingPage extends React.Component {
                 color: colors.bgGray,
                 bgColor: colors.cosmicLatte,
                 style: linkStyle,
-                size: 75,
-                onMouseOver: () => {this.setPageTitle('Drop me a line')},
-                onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
+                size: iconSize
             },
             {
                 fontAwesomeClass: 'fa-github-alt',
@@ -80,9 +132,7 @@ class LandingPage extends React.Component {
                 color: colors.bgGray,
                 bgColor: colors.cosmicLatte,
                 style: linkStyle,
-                size: 75,
-                onMouseOver: () => {this.setPageTitle('Check out some code')},
-                onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
+                size: iconSize
             },
             {
                 fontAwesomeClass: 'fa-codepen',
@@ -90,9 +140,7 @@ class LandingPage extends React.Component {
                 color: colors.bgGray,
                 bgColor: colors.cosmicLatte,
                 style: linkStyle,
-                size: 75,
-                onMouseOver: () => {this.setPageTitle('Check out some code')},
-                onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
+                size: iconSize
             },
             {
                 fontAwesomeClass: 'fa-linkedin',
@@ -100,16 +148,14 @@ class LandingPage extends React.Component {
                 color: colors.bgGray,
                 bgColor: colors.cosmicLatte,
                 style: linkStyle,
-                size: 75,
-                onMouseOver: () => {this.setPageTitle('Let\'s connect')},
-                onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
+                size: iconSize
             }
         ];
 
         return(
             <div style={landingPageStyle}>
                 <KnockoutTextContainer style={kocStyle}>
-                    <KnockoutText style={{...koStyle, fontSize: '900%', marginBottom: '45px'}}>
+                    <KnockoutText style={{...koStyle, fontSize: koHeaderFontSize, marginBottom: '45px'}}>
                             Hey there.
                     </KnockoutText>
                     <KnockoutText style={koStyle}>
@@ -127,56 +173,5 @@ class LandingPage extends React.Component {
         );
     }
 }
-
-/*
-
- render() {
- const iconList = [
- {
- fontAwesomeClass: 'fa-envelope',
- link: links.email,
- color: colors.bgGray,
- bgColor: colors.cosmicLatte,
- onMouseOver: () => {this.setPageTitle('DROP ME A LINE')},
- onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
- },
- {
- fontAwesomeClass: 'fa-github-alt',
- link: links.github,
- color: colors.bgGray,
- bgColor: colors.cosmicLatte,
- onMouseOver: () => {this.setPageTitle('CHECK OUT SOME CODE')},
- onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
- },
- {
- fontAwesomeClass: 'fa-codepen',
- link: links.codepen,
- color: colors.bgGray,
- bgColor: colors.cosmicLatte,
- onMouseOver: () => {this.setPageTitle('CHECK OUT SOME CODE')},
- onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
- },
- {
- fontAwesomeClass: 'fa-linkedin',
- link: links.linkedin,
- color: colors.bgGray,
- bgColor: colors.cosmicLatte,
- onMouseOver: () => {this.setPageTitle('LET\'S CONNECT')},
- onMouseLeave: () => {this.setPageTitle(this.defaultPageTitle)}
- }
- ];
-
- return(
- <div className='landing-page'>
- <ParallaxTitle title={this.state.pageTitle} height='100vh' width='100vw'/>
- <IconLinkContainer
- iconList={iconList}
- style={{justifySelf: 'flex-end', marginBottom: '5vh'}}
- />
- </div>
- );
- }
-
- */
 
 export default LandingPage;
