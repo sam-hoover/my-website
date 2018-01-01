@@ -154,14 +154,17 @@ class LandingPage extends React.Component {
 
         return(
             <div style={landingPageStyle}>
-                <KnockoutTextContainer style={kocStyle}>
-                    <KnockoutText style={{...koStyle, fontSize: koHeaderFontSize, marginBottom: '45px'}}>
+                <KnockoutTextContainer style={kocStyle} fallbackColor={colors.cosmicLatte}>
+                    <KnockoutText
+                        style={{...koStyle, fontSize: koHeaderFontSize, marginBottom: '45px'}}
+                        fallbackColor={colors.cosmicLatte}
+                    >
                             Hey there.
                     </KnockoutText>
-                    <KnockoutText style={koStyle}>
+                    <KnockoutText style={koStyle} fallbackColor={colors.cosmicLatte}>
                         I'm Sam.
                     </KnockoutText>
-                    <KnockoutText style={koStyle}>
+                    <KnockoutText style={koStyle} fallbackColor={colors.cosmicLatte}>
                         I solve problems & write code.
                     </KnockoutText>
                 </KnockoutTextContainer>
