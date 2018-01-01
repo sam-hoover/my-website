@@ -1,8 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+import LandingPage from './components/LandingPage';
+
+import './style/index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function App() {
+    return(
+        <div>
+            <LandingPage/>
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
+
 registerServiceWorker();
